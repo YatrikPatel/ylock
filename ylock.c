@@ -79,13 +79,19 @@ Note:  only events we set the mask for are detected!
 				continue;
 			if (keysym == XK_BackSpace) {
 				if (length != 0) password[--length] = '\0';
+				continue;
+			} else if (keysym == XK_Return) {
+				password[length] = "\0";
+				printf("%s", password);
+				continue;
+			} else {
+				printf("You pressed the %c key!\n",text[0]);
+				password[length++] = text[0];
+				printf("%s", password);
 			}
 			/* use the XLookupString routine to convert the invent
 			   KeyPress data into regular text.  Weird but necessary...
 			 */
-			printf("You pressed the %c key!\n",text[0]);
-			password[length++] = text[0];
-			printf("%s", password);
 		}
 		if (event.type==ButtonPress) {
 			/* tell where the mouse Button was Pressed */
